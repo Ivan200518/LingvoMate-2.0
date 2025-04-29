@@ -1,5 +1,6 @@
 package com.example.lingvomatenew.domain.model
 
-class Message {
-
-}
+data class Message (
+    val text : String,
+    val id : String
+)
