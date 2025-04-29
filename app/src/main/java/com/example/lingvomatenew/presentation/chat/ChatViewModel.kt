@@ -14,6 +14,7 @@ import com.codewithfk.chatter.R
 import com.codewithfk.chatter.SupabaseStorageUtils
 import com.codewithfk.chatter.model.Channel
 import com.codewithfk.chatter.model.Message
+import com.example.lingvomatenew.domain.model.Message
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.Firebase
 import com.google.firebase.auth.GoogleAuthCredential
@@ -26,6 +27,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.storage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import io.github.jan.supabase.gotrue.mfa.FactorType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -59,16 +61,16 @@ class ChatViewModel @Inject constructor(@ApplicationContext val context: Context
                 }
             }
     }
-
-    fun sendImageMessage(uri: Uri, channelID: String) {
-        viewModelScope.launch {
-            val storageUtils = SupabaseStorageUtils(context)
-            val downloadUri = storageUtils.uploadImage(uri)
-            downloadUri?.let {
-                sendMessage(channelID, null, downloadUri)
-            }
-        }
-    }
+//
+//    fun sendImageMessage(uri: Uri, channelID: String) {
+//        viewModelScope.launch {
+//            val storageUtils = SupabaseStorageUtils(context)
+//            val downloadUri = storageUtils.uploadImage(uri)
+//            downloadUri?.let {
+//                sendMessage(channelID, null, downloadUri)
+//            }
+//        }
+//    }
 
     fun listenForMessages(channelID: String) {
         db.getReference("messages").child(channelID).orderByChild("createdAt")
@@ -159,7 +161,7 @@ class ChatViewModel @Inject constructor(@ApplicationContext val context: Context
 
         val request = object : StringRequest(Method.POST, fcmUrl, Response.Listener {
             Log.d("ChatViewModel", "Notification sent successfully")
-        }, Response.ErrorListener {
+        }, FactorType.TOTP.Response.ErrorListener {
             Log.e("ChatViewModel", "Failed to send notification")
         }) {
             override fun getBody(): ByteArray {
