@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.LingvoMateNew" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="SplashScreenTheme" parent="Theme.LingvoMateNew">
+        <item name="android:windowBackground">@drawable/newback</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/message</item>
+        <item name="postSplashScreenTheme">@style/Theme.LingvoMateNew </item>
+    </style>
+
+
+</resources>
