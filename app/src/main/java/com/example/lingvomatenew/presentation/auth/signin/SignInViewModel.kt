@@ -15,7 +15,6 @@ class SignInViewModel @Inject constructor() : ViewModel() {
 
     fun signIn(email: String, password: String) {
         _state.value = SignInState.Loading
-        // Firebase signIn
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {

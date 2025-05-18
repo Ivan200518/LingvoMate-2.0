@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1043701056631",
+    "project_id": "lingvomatenew",
+    "storage_bucket": "lingvomatenew.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043701056631:android:3793070a71cb1676b23272",
+        "android_client_info": {
+          "package_name": "com.example.lingvomatenew"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnp5naj4vNyGDcTkBHectOmL3EWZPDJZc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

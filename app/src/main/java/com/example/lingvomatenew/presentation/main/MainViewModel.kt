@@ -1,4 +1,4 @@
-package com.example.lingvomatenew.presentation.auth.main
+package com.example.lingvomatenew.presentation.main
 
 import androidx.lifecycle.ViewModel
 
