@@ -7,8 +7,9 @@ import com.google.firebase.database.database
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class HomeRepositoryImpl : HomeRepository{
+class HomeRepositoryImpl @Inject constructor() : HomeRepository{
 
     private val firebaseDatabase = Firebase.database
     private val _channels = MutableStateFlow<List<Channel>>(emptyList())

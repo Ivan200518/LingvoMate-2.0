@@ -68,6 +68,7 @@ fun HomeScreen(navController: NavController) {
             .clip(RoundedCornerShape(16.dp))
             .background(Color.Blue)
             .clickable {
+                addChannel.value = true
             }) {
             Text(
                 text = "Add Channel", modifier = Modifier.padding(16.dp), color = Color.White

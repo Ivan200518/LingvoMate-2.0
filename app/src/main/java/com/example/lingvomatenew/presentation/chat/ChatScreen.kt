@@ -7,13 +7,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -29,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -68,19 +72,34 @@ fun ChatMessages(
     val msg = remember {
         mutableStateOf("")
     }
-    Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn {
+
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(messages.size) {
+        if (messages.isNotEmpty()) {
+            listState.animateScrollToItem(messages.size - 1)
+        }
+    }
+    Column(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp),
+            state = listState) {
             items(messages) { message ->
                 ChatBubble(message = message)
             }
         }
 
+        Divider()
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .padding(8.dp)
-                .background(Color.LightGray), verticalAlignment = Alignment.CenterVertically
+                .background(Color.LightGray)
+                .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
 
             TextField(
@@ -102,32 +121,30 @@ fun ChatMessages(
         }
     }
 }
-
 @Composable
 fun ChatBubble(message: Message) {
     val isCurrentUser = message.senderId == Firebase.auth.currentUser?.uid
-    val bubbleColor = if (isCurrentUser) {
-        Color.Blue
-    } else {
-        Color.Green
-    }
+    val bubbleColor = if (isCurrentUser) Color.Blue else Color.Green
+    val alignment = if (isCurrentUser) Alignment.CenterEnd else Alignment.CenterStart
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 4.dp, horizontal = 8.dp)
-
     ) {
-        val alignment = if (!isCurrentUser) Alignment.CenterStart else Alignment.CenterEnd
         Box(
             modifier = Modifier
-                .padding(8.dp)
-                .background(color = bubbleColor, shape = RoundedCornerShape(8.dp))
                 .align(alignment)
+                .background(color = bubbleColor, shape = RoundedCornerShape(8.dp))
+                .padding(8.dp)
+                .widthIn(max = 240.dp)
         ) {
             Text(
-                text = message.message, color = Color.White, modifier = Modifier.padding(8.dp)
+                text = message.message.trim(),
+                color = Color.White,
+                softWrap = true,
+                overflow = TextOverflow.Clip
             )
         }
-
     }
 }

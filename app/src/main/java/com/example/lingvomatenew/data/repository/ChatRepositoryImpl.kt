@@ -12,8 +12,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.util.UUID
+import javax.inject.Inject
 
-class ChatRepositoryImpl : ChatRepository {
+class ChatRepositoryImpl @Inject constructor(): ChatRepository {
 
     private val _messages = MutableStateFlow<List<Message>>(emptyList())
     override val messages : StateFlow<List<Message>> =  _messages.asStateFlow()

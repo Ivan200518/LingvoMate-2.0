@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-
+            getChannels()
         }
     }
     fun signOut() {

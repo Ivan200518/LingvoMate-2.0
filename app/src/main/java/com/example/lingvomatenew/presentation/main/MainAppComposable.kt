@@ -1,12 +1,15 @@
 package com.example.lingvomatenew.presentation.main
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.lingvomatenew.presentation.auth.signin.SignInScreen
 import com.example.lingvomatenew.presentation.auth.signin.SignUpScreen
 import com.example.lingvomatenew.presentation.auth.signup.SignUpViewModel
+import com.example.lingvomatenew.presentation.chat.ChatScreen
 import com.example.lingvomatenew.presentation.home.HomeScreen
 import com.example.lingvomatenew.presentation.onboard.OnBoardingScreen
 import com.google.firebase.Firebase
@@ -33,6 +36,15 @@ fun MainApp() {
         }
         composable(RouteScreens.HOME) {
             HomeScreen(navController)
+        }
+
+        composable("chat/{channelId}", arguments = listOf(
+            navArgument("channelId") {
+                type = NavType.StringType
+            }
+        )) {
+            val channelId = it.arguments?.getString("channelId") ?: ""
+            ChatScreen(navController, channelId)
         }
     }
 
