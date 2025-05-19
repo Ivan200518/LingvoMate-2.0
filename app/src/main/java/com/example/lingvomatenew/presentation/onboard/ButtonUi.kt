@@ -1,4 +1,4 @@
-package com.example.lingvomatenew.presentation.auth.onboard
+package com.example.lingvomatenew.presentation.onboard
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button

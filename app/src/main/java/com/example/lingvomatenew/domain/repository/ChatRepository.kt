@@ -1,20 +1,14 @@
 package com.example.lingvomatenew.domain.repository
 
+import com.example.lingvomatenew.domain.model.Channel
 import com.example.lingvomatenew.domain.model.Message
+import kotlinx.coroutines.flow.StateFlow
 
 interface ChatRepository {
-    fun sendMessage(message: Message)
+    fun sendMessage(channelId: String, messageText : String)
 
-    fun sendAudioMessage(message: Message)
+    fun listenForMessages(channelId : String)
 
-    fun startAudioCall()
-
-    fun finishAudioCall()
-
-    fun sharePhoto()
-
-    fun deletePhoto()
-
-    fun sendPhoto()
+    val messages : StateFlow<List<Message>>
 
 }

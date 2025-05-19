@@ -20,17 +20,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.lingvomatenew.R
-import com.example.lingvomatenew.presentation.auth.onboard.ButtonUi
 import com.example.lingvomatenew.presentation.auth.onboard.Indicator
 import com.example.lingvomatenew.presentation.auth.onboard.OnBoardingGraphUi
 import com.example.lingvomatenew.presentation.auth.onboard.OnBoardingModel
+import com.example.lingvomatenew.presentation.main.MainApp
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen(onFinished: () -> Unit) {
+fun OnBoardingScreen(navController: NavController = rememberNavController()) {
 
     val pages = listOf(
         OnBoardingModel.FirstPage,
@@ -84,7 +86,6 @@ fun OnBoardingScreen(onFinished: () -> Unit) {
                     currentPage = pagerState.currentPage
                 )
             }
-
             Box(modifier =  Modifier.weight(1f), contentAlignment = Alignment.CenterEnd){
                 ButtonUi(text = buttonState.value[1],
                     backgroundColor = colorResource(R.color.blue),
@@ -95,7 +96,7 @@ fun OnBoardingScreen(onFinished: () -> Unit) {
                                 pagerState.animateScrollToPage(pagerState.currentPage + 1)
                             }
                         }else {
-                            onFinished()
+                            navController.navigate("login")
                         }
 
                 }
@@ -112,8 +113,8 @@ fun OnBoardingScreen(onFinished: () -> Unit) {
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun OnBoardingScreenPreview() {
-    OnBoardingScreen(onFinished = {})
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun OnBoardingScreenPreview() {
+//    OnBoardingScreen(onFinished = {})
+//}

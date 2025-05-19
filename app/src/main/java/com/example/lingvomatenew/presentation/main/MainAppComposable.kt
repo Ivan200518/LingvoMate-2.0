@@ -5,8 +5,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.lingvomatenew.presentation.auth.signin.SignInScreen
-import com.example.lingvomatenew.presentation.auth.signup.SignUpScreen
+import com.example.lingvomatenew.presentation.auth.signin.SignUpScreen
+import com.example.lingvomatenew.presentation.auth.signup.SignUpViewModel
 import com.example.lingvomatenew.presentation.home.HomeScreen
+import com.example.lingvomatenew.presentation.onboard.OnBoardingScreen
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 
@@ -16,20 +18,30 @@ fun MainApp() {
 
     val currentUser = FirebaseAuth.getInstance().currentUser
     val navController = rememberNavController()
-    val start = if (currentUser != null) "home" else "login"
+    val start = if(currentUser != null) RouteScreens.HOME else RouteScreens.ONBOARDING
     NavHost(
         navController = navController, startDestination = start
     ) {
-
-        composable("home" ) {
-            HomeScreen()
+        composable(RouteScreens.ONBOARDING) {
+            OnBoardingScreen(navController)
         }
-
-        composable("login") {
-            SignInScreen()
+        composable(RouteScreens.LOGIN) {
+            SignInScreen(navController)
         }
-        composable("signup") {
-            SignUpScreen()
+        composable(RouteScreens.SIGN_UP) {
+            SignUpScreen(navController)
+        }
+        composable(RouteScreens.HOME) {
+            HomeScreen(navController)
         }
     }
+
 }
+
+object RouteScreens {
+    const val LOGIN = "login"
+    const val SIGN_UP = "signup"
+    const val HOME = "home"
+    const val ONBOARDING = "onboarding"
+}
+
