@@ -59,7 +59,7 @@ fun OnBoardingScreen(navController: NavController = rememberNavController()) {
 
     Scaffold(
         containerColor = colorResource(R.color.specialblack),
-        bottomBar ={ Row (modifier = Modifier.fillMaxWidth().padding(10.dp),
+        bottomBar ={ Row (modifier = Modifier.fillMaxWidth().padding(bottom = 45.dp, start = 10.dp, end = 10.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically){
 

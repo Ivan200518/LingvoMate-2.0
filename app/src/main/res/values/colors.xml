@@ -15,6 +15,8 @@
     <color name="password_red">#EA4335</color>
     <color name="ac_gray">#616161</color>
     <color name="d_white">#D9D9D9</color>
+    <color name="black_12">#121212</color>
+    <color name="black_1c">#1C1E2A</color>
 
 
 </resources>

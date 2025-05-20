@@ -32,14 +32,8 @@ class HomeViewModel @Inject constructor(
             getChannels()
         }
     }
-    fun signOut() {
-        FirebaseAuth.getInstance().signOut()
-        _state.value = HomeState.SuccessLogOut
-    }
+  
 
-    fun resetHomeState() {
-        _state.value = HomeState.Nothing
-    }
 
     fun addChannel(name: String) {
         viewModelScope.launch {
