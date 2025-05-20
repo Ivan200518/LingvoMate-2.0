@@ -23,4 +23,9 @@ class ChatViewModel @Inject constructor(
     fun startListening(channelId: String) {
         listenForMessagesUseCase.invoke(channelId)
     }
+
+
+    fun sendImageMessage() {
+
+    }
 }

@@ -31,11 +31,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.lingvomatenew.R
 import com.example.lingvomatenew.domain.model.Message
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -80,7 +82,7 @@ fun ChatMessages(
             listState.animateScrollToItem(messages.size - 1)
         }
     }
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().background(colorResource(R.color.black_12))) {
         LazyColumn(
             modifier = Modifier
                 .weight(1f)
@@ -103,6 +105,7 @@ fun ChatMessages(
         ) {
 
             TextField(
+
                 value = msg.value,
                 onValueChange = { msg.value = it },
                 modifier = Modifier.weight(1f),
@@ -124,7 +127,7 @@ fun ChatMessages(
 @Composable
 fun ChatBubble(message: Message) {
     val isCurrentUser = message.senderId == Firebase.auth.currentUser?.uid
-    val bubbleColor = if (isCurrentUser) Color.Blue else Color.Green
+    val bubbleColor = if (isCurrentUser) colorResource(R.color.blue) else colorResource(R.color.black_1c)
     val alignment = if (isCurrentUser) Alignment.CenterEnd else Alignment.CenterStart
 
     Box(
@@ -148,3 +151,4 @@ fun ChatBubble(message: Message) {
         }
     }
 }
+

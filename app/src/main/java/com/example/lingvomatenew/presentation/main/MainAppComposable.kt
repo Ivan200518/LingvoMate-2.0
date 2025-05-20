@@ -12,6 +12,7 @@ import com.example.lingvomatenew.presentation.auth.signup.SignUpViewModel
 import com.example.lingvomatenew.presentation.chat.ChatScreen
 import com.example.lingvomatenew.presentation.home.HomeScreen
 import com.example.lingvomatenew.presentation.onboard.OnBoardingScreen
+import com.example.lingvomatenew.presentation.profile.ProfileScreen
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 
@@ -38,6 +39,10 @@ fun MainApp() {
             HomeScreen(navController)
         }
 
+        composable(RouteScreens.PROFILE) {
+            ProfileScreen(navController)
+        }
+
         composable("chat/{channelId}", arguments = listOf(
             navArgument("channelId") {
                 type = NavType.StringType
@@ -55,5 +60,6 @@ object RouteScreens {
     const val SIGN_UP = "signup"
     const val HOME = "home"
     const val ONBOARDING = "onboarding"
+    const val PROFILE = "profile"
 }
 

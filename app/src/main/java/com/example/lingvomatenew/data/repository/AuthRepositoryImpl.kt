@@ -1,8 +1,6 @@
 package com.example.lingvomatenew.data.repository
 
 import com.example.lingvomatenew.domain.repository.AuthRepository
-import com.example.lingvomatenew.presentation.auth.signin.SignInState
-import com.example.lingvomatenew.presentation.auth.signup.SignUpState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -27,7 +25,7 @@ class AuthRepositoryImpl @Inject constructor() : AuthRepository {
         return try {
             val authResult = FirebaseAuth.getInstance()
                 .createUserWithEmailAndPassword(email, password)
-                .await() // await() из kotlinx-coroutines-play-services для ожидания результата
+                .await()
 
             authResult.user?.updateProfile(
                 UserProfileChangeRequest.Builder()
